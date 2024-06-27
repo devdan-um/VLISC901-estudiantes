@@ -1,0 +1,2 @@
+insert into ESTUDIANTE (NOMBRE,APELLIDO,ENROLADO,ID_CURSO,TELEFONO)
+VALUES ('carmen','piedras', true, 1 , 123);
