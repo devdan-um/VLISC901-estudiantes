@@ -1,17 +1,20 @@
 package com.univer.estudiantes.controller;
 
+import com.univer.estudiantes.EstudianteService;
 import com.univer.estudiantes.entity.EstudianteEntity;
 import com.univer.estudiantes.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EstudianteController {
 
     @Autowired
     private EstudianteRepository repository;
+
+    @Autowired
+    private EstudianteService estudianteService;
 
     @GetMapping("/api/univer/estudiante/{id}")
     public EstudianteEntity estudiantePorId(@PathVariable Integer id){
@@ -21,8 +24,5 @@ public class EstudianteController {
         } else {
             return new EstudianteEntity();
         }
-
     }
-
-
 }
