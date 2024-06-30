@@ -20,6 +20,7 @@ public class EstudianteController {
         if(repository.findById(id).isPresent()){
             return new ResponseEntity<>(repository.findById(id).get(), HttpStatus.OK);
         } else {
+
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
