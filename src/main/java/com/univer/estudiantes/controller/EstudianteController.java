@@ -14,7 +14,7 @@ public class EstudianteController {
     private EstudianteRepository repository;
 
     @GetMapping("/api/univer/estudiante/{id}")
-    public EstudianteEntity estudiantePorId(@PathVariable Integer id){
+    public EstudianteEntity EstudiantePorId(@PathVariable Integer id){
 
         if(repository.findById(id).isPresent()){
             return repository.findById(id).get();
