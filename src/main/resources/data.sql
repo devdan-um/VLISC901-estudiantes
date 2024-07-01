@@ -1,2 +1,2 @@
 insert into estudiantes (NOMBRE,APELLIDO,ENROLADO,TELEFONO);
-VALUES ('carmen','piedras', 'true','29212');
+VALUES ('Raul','Aramid', 'true','78925');
