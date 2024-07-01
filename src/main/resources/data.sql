@@ -1,2 +1,2 @@
-insert into estudiantes (NOMBRE,APELLIDO,ENROLADO,TELEFONO);
-VALUES ('Raul','Aramid', 'true','78925');
+INSERT INTO ESTUDIANTE (NOMBRE, APELLIDO, ENROLADO, ID_CURSO, TELEFONO)
+VALUES ('Raul','Aramid',true,4,789);
