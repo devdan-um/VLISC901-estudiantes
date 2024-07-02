@@ -4,6 +4,7 @@ import com.univer.estudiantes.EstudianteService;
 import com.univer.estudiantes.entity.EstudianteEntity;
 import com.univer.estudiantes.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +18,12 @@ public class EstudianteController {
     private EstudianteService estudianteService;
 
     @GetMapping("/api/univer/estudiante/{id}")
-    public EstudianteEntity estudiantePorId(@PathVariable Integer id){
+    public ResponseEntity<EstudianteEntity> estudiantePorId(@PathVariable Integer id){
 
         if(repository.findById(id).isPresent()){
-            return repository.findById(id).get();
+            return new ResponseEntity<>(repository.findById(id).get(), HttpStatus.OK);
         } else {
-            return new EstudianteEntity();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
