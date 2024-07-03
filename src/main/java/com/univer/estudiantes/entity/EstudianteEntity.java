@@ -24,13 +24,13 @@ public class EstudianteEntity {
     private Integer idCurso;
 
     @Column(name = "TELEFONO")
-    private Integer telefono;
+    private Long telefono;
 
-    public Integer getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 
