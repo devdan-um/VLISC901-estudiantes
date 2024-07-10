@@ -1,49 +1,50 @@
-package com.univer.estudiantes.model.request;
+package com.univer.estudiantes.controller;
 
 public class EstudianteRequest {
-    private String nombre;
-    private String apellido;
-    private Boolean enrolado;
-    private Integer idCurso;
-    private Long telefono;
+
+    private String Nombre;
+    private String Apellido;
+    private Boolean Enrolado;
+    private Integer IdCurso;
+    private Integer Telefono;
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.Nombre = nombre;
     }
 
     public String getApellido() {
-        return apellido;
+        return Apellido;
     }
 
     public void setApellido(String apellido) {
-        this.apellido = apellido;
+        this.Apellido = apellido;
     }
 
     public Boolean getEnrolado() {
-        return enrolado;
+        return Enrolado;
     }
 
     public void setEnrolado(Boolean enrolado) {
-        this.enrolado = enrolado;
+        this.Enrolado = enrolado;
     }
 
     public Integer getIdCurso() {
-        return idCurso;
+        return IdCurso;
     }
 
     public void setIdCurso(Integer idCurso) {
-        this.idCurso = idCurso;
+        this.IdCurso = idCurso;
     }
 
-    public Long getTelefono() {
-        return telefono;
+    public Integer getTelefono() {
+        return Telefono;
     }
 
-    public void setTelefono(Long telefono) {
-        this.telefono = telefono;
+    public void setTelefono(Integer telefono) {
+        this.Telefono = telefono;
     }
 }
