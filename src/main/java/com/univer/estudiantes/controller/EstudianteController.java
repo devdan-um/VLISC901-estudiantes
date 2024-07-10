@@ -26,7 +26,8 @@ public class EstudianteController {
 
         if(response != null){
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
+        }
+        else {
 
             return ResponseEntity.noContent().build();
         }

@@ -22,7 +22,8 @@ public class EstudianteService {
             response.setNombre(entity.get().getNombre());
             response.setApellido(entity.get().getApellido());
             return response;
-        } else {
+        }
+        else {
             return  null;
         }
     }
