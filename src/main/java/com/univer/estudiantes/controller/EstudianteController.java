@@ -2,6 +2,8 @@ package com.univer.estudiantes.controller;
 
 import com.univer.estudiantes.entity.EstudianteEntity;
 import com.univer.estudiantes.repository.EstudianteRepository;
+import com.univer.estudiantes.response.EstudianteResponse;
+import com.univer.estudiantes.service.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +15,24 @@ public class EstudianteController {
     @Autowired
     private EstudianteRepository repository;
 
-    @GetMapping("/api/univer/estudiante/{id}")
-    public ResponseEntity<EstudianteEntity>estudiantePorId(@PathVariable Integer id){
+    @Autowired
+    private EstudianteService estudianteService;
 
-        if(repository.findById(id).isPresent()){
-            return new ResponseEntity<>(repository.findById(id).get(), HttpStatus.OK);
+    @GetMapping("/api/univer/estudiante/{id}")
+    public ResponseEntity estudiantePorId(@PathVariable Integer id){
+// modificaciones en clases
+
+        EstudianteResponse response = this.estudianteService.getEstudiante(1);
+
+        if(response != null){
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
 
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.noContent().build();
         }
-// se agregan datos nuevos
     }
+
+    // nuevos metodos
     @PostMapping("/api/univer/estudiante/save")
     public ResponseEntity<EstudianteEntity>guardarestudiante(@RequestBody EstudianteRequest request){
         EstudianteEntity estudiante=new EstudianteEntity();
