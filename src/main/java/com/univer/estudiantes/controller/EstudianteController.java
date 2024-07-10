@@ -1,6 +1,8 @@
 package com.univer.estudiantes.controller;
 
-import com.univer.estudiantes.EstudianteService;
+import com.univer.estudiantes.model.request.EstudianteRequest;
+import com.univer.estudiantes.model.response.EstudianteResponse;
+import com.univer.estudiantes.service.EstudianteService;
 import com.univer.estudiantes.entity.EstudianteEntity;
 import com.univer.estudiantes.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,29 @@ public class EstudianteController {
     private EstudianteService estudianteService;
 
     @GetMapping("/api/univer/estudiante/{id}")
-    public ResponseEntity<EstudianteEntity> estudiantePorId(@PathVariable Integer id){
+    public ResponseEntity estudiantePorId(@PathVariable Integer id){
 
-        if(repository.findById(id).isPresent()){
-            return new ResponseEntity<>(repository.findById(id).get(), HttpStatus.OK);
+        EstudianteResponse response = this.estudianteService.getEstudiante(id);
+
+        if(response != null){
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.noContent().build();
         }
+
     }
+
+    @PostMapping("/api/univer/estudiante/save")
+    public ResponseEntity<EstudianteEntity>guardarestudiante(@RequestBody EstudianteRequest request){
+        EstudianteEntity estudiante=new EstudianteEntity();
+        estudiante.setNombre(request.getNombre());
+        estudiante.setApellido(request.getApellido());
+        estudiante.setEnrolado(request.getEnrolado());
+        estudiante.setIdCurso(request.getIdCurso());
+        estudiante.setTelefono(request.getTelefono());
+        EstudianteEntity savedEstudiante=repository.save(estudiante);
+        return new ResponseEntity<>(savedEstudiante, HttpStatus.CREATED);
+
+    }
+
 }

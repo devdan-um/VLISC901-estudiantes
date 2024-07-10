@@ -1,6 +1,6 @@
 package com.univer.estudiantes.controller;
 
-import com.univer.estudiantes.EstudianteService;
+import com.univer.estudiantes.service.EstudianteService;
 import com.univer.estudiantes.entity.EstudianteEntity;
 import com.univer.estudiantes.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +42,12 @@ public class EstudianteRequest {
         return estudianteService.getAllEstudiantes();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/api/univer/estudiante/get/get/{id}")
     public EstudianteEntity searchStudentById(@PathVariable("id") Integer ID){
         return estudianteService.getEstudianteById(ID);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteEstudianteById(@PathVariable("ID") Integer ID){
         estudianteService.deleteEstudiante(ID);
     }
