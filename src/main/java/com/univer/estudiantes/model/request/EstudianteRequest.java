@@ -1,4 +1,4 @@
-package com.univer.estudiantes.controller;
+package com.univer.estudiantes.model.request;
 
 public class EstudianteRequest {
     private String nombre;
