@@ -24,7 +24,7 @@ public class EstudianteRequest {
        return estudianteService.createEstudiante(estudiante);
 
     }*/
-
+    /*
     @PostMapping("/api/univer/estudiante/save")
     public ResponseEntity<EstudianteEntity> guardarEstudiante(@RequestBody EstudianteEntity request) {
         EstudianteEntity estudiante = new EstudianteEntity();
@@ -35,7 +35,7 @@ public class EstudianteRequest {
         estudiante.setTelefono(request.getTelefono());
         EstudianteEntity savedEstudiante = estudianteRepository.save(estudiante);
         return new ResponseEntity<>(savedEstudiante, HttpStatus.CREATED);
-    }
+    }*/
 
     @GetMapping("/api/univer/estudiante/all")
     public List<EstudianteEntity> getAllEstudiantes(){

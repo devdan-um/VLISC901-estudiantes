@@ -4,7 +4,7 @@ import com.univer.estudiantes.repository.EstudianteRepository;
 import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Entity
+//@Entity
 public class EstudianteResponse {
     private  String nombre;
     private String apellido;

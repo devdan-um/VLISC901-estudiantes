@@ -47,19 +47,19 @@ public class EstudianteService {
         estudianteRepository.deleteById(ID);
     }
 
-    public EstudianteResponse getEstudiante(Integer id){
-        EstudianteResponse response = new EstudianteResponse();
+    public EstudianteResponse getEstudiante(Integer id) {
+        EstudianteEntity estudianteEntity = estudianteRepository.findById(id).orElse(null);
 
-        Optional<EstudianteEntity> entity = estudianteRepository.findById(id);
-
-        if(entity.isPresent()){
-            response.setNombre(entity.get().getNombre());
-            response.setApellido(entity.get().getApellido());
-            return response;
-
-        }else {
-            return  null;
+        if (estudianteEntity == null) {
+            return null;
         }
+
+        EstudianteResponse response = new EstudianteResponse();
+        response.setNombre(estudianteEntity.getNombre());
+        response.setApellido(estudianteEntity.getApellido());
+        response.setIdCurso(estudianteEntity.getIdCurso());
+
+        return response;
     }
 
 }

@@ -4,7 +4,7 @@ public class EstudianteRequest {
     private String nombre;
     private String apellido;
     private Boolean enrolado;
-    private Integer IdCurso;
+    private Integer idCurso; // Use camelCase for consistency
     private Integer telefono;
 
     public String getNombre() {
@@ -32,11 +32,11 @@ public class EstudianteRequest {
     }
 
     public Integer getIdCurso() {
-        return IdCurso;
+        return idCurso;
     }
 
     public void setIdCurso(Integer idCurso) {
-        IdCurso = idCurso;
+        this.idCurso = idCurso;
     }
 
     public Integer getTelefono() {
