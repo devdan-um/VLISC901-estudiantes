@@ -1,7 +1,7 @@
 const estudiante = {
-    nombre: "Jose",
-    apellido: "Condes",
-    idCurso: 3
+    nombre: "Alexis",
+    apellido: "Flores",
+    idCurso: 2
 }
 fetch('http://localhost:8585/api/univer/estudiante/save', {
     method: "POST",
@@ -17,7 +17,7 @@ fetch('http://localhost:8585/api/univer/estudiante/save', {
     }
 })
 .then(json=>{
-    console.log("segunda promesa")
+    console.log("Segunda Promesa")
     console.log(json);
     return json;
 })
