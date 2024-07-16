@@ -6,6 +6,7 @@ public class EstudianteResponse {
 
     private  String nombre;
     private String apellido;
+    private String idCurso;
 
 
     public String getNombre() {
@@ -24,5 +25,12 @@ public class EstudianteResponse {
         this.apellido = apellido;
     }
 
+    public String getIdCurso() {
+        return idCurso;
+    }
+
+    public void setIdCurso(String idCurso) {
+        this.idCurso = idCurso;
+    }
 }
 
