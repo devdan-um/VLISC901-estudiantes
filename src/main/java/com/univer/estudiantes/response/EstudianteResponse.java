@@ -14,7 +14,7 @@ public class EstudianteResponse {
     }
 
     public void setApellido(String apellido) {
-        this.apellido = apellido;
+        this.apellido =  apellido;
     }
 
     public String getApellido(){
