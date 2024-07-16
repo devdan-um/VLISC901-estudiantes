@@ -1,4 +1,4 @@
-package com.univer.estudiantes.controller;
+package com.univer.estudiantes.model.request;
 
 public class EstudianteRequest {
 
@@ -6,7 +6,7 @@ public class EstudianteRequest {
     private String Apellido;
     private Boolean Enrolado;
     private Integer IdCurso;
-    private Integer Telefono;
+    private Integer telefono;
 
     public String getNombre() {
         return Nombre;
@@ -41,10 +41,10 @@ public class EstudianteRequest {
     }
 
     public Integer getTelefono() {
-        return Telefono;
+        return telefono;
     }
 
     public void setTelefono(Integer telefono) {
-        this.Telefono = telefono;
+        this.telefono = telefono;
     }
 }

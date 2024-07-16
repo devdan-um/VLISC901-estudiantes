@@ -1,5 +1,5 @@
 package com.univer.estudiantes.controller;
-
+import org.springframework.web.bind.annotation.*;
 import com.univer.estudiantes.entity.EstudianteEntity;
 import com.univer.estudiantes.model.request.EstudianteRequest;
 import com.univer.estudiantes.model.response.EstudianteResponse;
@@ -37,7 +37,7 @@ public class EstudianteController {
         estudiante.setApellido(request.getApellido());
         estudiante.setEnrolado(request.getEnrolado());
         estudiante.setIdCurso(request.getIdCurso());
-        estudiante.setTelefono(request.getTelefono());
+
 
         repository.save(estudiante);
 
