@@ -1,6 +1,7 @@
 package com.univer.estudiantes.controller;
 
 import com.univer.estudiantes.entity.EstudianteEntity;
+import com.univer.estudiantes.model.request.EstudianteRequest;
 import com.univer.estudiantes.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +28,17 @@ public class EstudianteController {
     public ResponseEntity guardado(@RequestBody EstudianteRequest request) {
 
         EstudianteEntity entity = new EstudianteEntity();
-        entity.setNombre(request.getName());
+        entity.setNombre(request.getNombre());
         entity.setApellido(request.getApellido());
-        entity.setEnrolado(request.getEnrollado());
-        entity.setIdCurso(request.getCurso());
+        entity.setEnrolado(request.getEnrolado());
+        entity.setIdCurso(request.getIdCurso());
         entity.setTelefono(request.getTelefono());
+
 
         this.repository.save(entity);
         return ResponseEntity.ok("se guardo exitosamente");
-
     }
 }
+
+
+
