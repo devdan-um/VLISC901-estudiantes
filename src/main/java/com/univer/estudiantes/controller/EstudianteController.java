@@ -25,7 +25,7 @@ public class EstudianteController {
         EstudianteResponse response = estudianteService.getEstudiante(id);
         return response != null ? new ResponseEntity<>(response, HttpStatus.OK) : ResponseEntity.noContent().build();
     }
-
+    @CrossOrigin("http://127.0.0.1:5500")
     @PostMapping("/save")
     public ResponseEntity<EstudianteEntity> guardarEstudiante(@RequestBody EstudianteRequest request) {
         EstudianteEntity estudiante = new EstudianteEntity();
