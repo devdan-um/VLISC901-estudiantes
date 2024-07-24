@@ -8,40 +8,101 @@
     <title>Formulario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
     <script type="text/javascript">
         function myfuction(){
             alert('Dentro de la funcion')
-            let name= document.getElementById("name").value;
-            let ln=document.getElementById("apellido").value;
+
+            
 
             const estudiante ={
-                nombre: "Noe",
-                apellido:"Resendiz",
-                idCurso:1
+                nombre: document.getElementById("name").value,
+                apellido:document.getElementById("apellido").value,
+                idCurso:document.getElementById("inputGroupSelect01").value
             }
 
             console.log(estudiante);
+
+            fetch('http://localhost:8686/api/univer/estudiante/save',{
+                method: "POST",
+                body: JSON.stringify(estudiante),
+                headers: {
+                    "Content-type":"application/json"}
+            })
+            .then(response =>{
+                console.log(response)
+                if(response.ok && response.status===201){
+                    console.log('dentro de la primera promesa')
+                    return response.json()
+                }else{
+                    throw Error (response.statusText)
+                }
+            })
+            .then(json=>{
+                console.log('segunda promesa')
+                console.log(json)
+                return json;
+            })
+            .catch(error=>console.log(error))
+                        
+            }
+        
+        function getCuatrimestres(){
+            fetch('http://localhost:8787/api/univer/cuatrimestre/all',{
+                method: 'GET',
+                headers:{
+                    'Accept':'application/json',
+                    "Content-Type":"application/json"
+                }
+            })
+            .then(response=>{
+                if(response.ok){
+                    return response.json()
+                }
+            })
+            .then(json =>{
+                console.log(json)
+                var options = "<option selected> Selecciona el cuatrimestre... </option>";
+                    for(var i=0; i<json.length; i++){
+                        console.log(json[i])
+                        options += "<option value="+json[i].cuatrimestre+">"+json[i].nombre+"</option>";
+                    }
+                    console.log(options)
+                document.getElementById("inputGroupSelect01").innerHTML=options
+                return json;
+            })
+            .catch(error => console.log(error))
         }
     </script>
 </head>
 <body>
 
     <form class="row g-3">
+        <h2>Ingresa los siguientes datos para enrolar un alumno a un cuatrimeste</h2>
         <div class="col-auto">
             <label for="name" class="visually-hidden">Nombre:</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" >
         </div>
-
-
+        
         <div class="col-auto">
             <label for="apellido" class="visually-hidden" >Apellido:</label>
             <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" >
         </div>
 
-        
+        <div class="col-auto">
+            <select class="form-select"  id="inputGroupSelect01">
+                <option selected>Selecciona un Cuatrimestre</option>
+                <script>
+                    const cuatrimestre = getCuatrimestres();
+                </script>
+            </select>
+    
+        </div>
+
         <div class="col-auto">
             <input type="button"  onclick="myfuction()" class="btn btn-outline-success" value="Guardar">
         </div>
       </form>
+
 </body>
 </html>
