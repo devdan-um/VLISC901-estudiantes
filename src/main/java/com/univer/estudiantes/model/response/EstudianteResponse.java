@@ -2,31 +2,31 @@ package com.univer.estudiantes.model.response;
 
 //@Entity
 public class EstudianteResponse {
-    private  String nombre;
-    private String apellido;
-    private Integer idCurso;
+    private  String Nombre;
+    private String Apellido;
+    private Integer IdCurso;
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
     public String getApellido() {
-        return apellido;
+        return Apellido;
     }
 
     public void setApellido(String apellido) {
-        this.apellido = apellido;
+        this.Apellido = apellido;
     }
 
     public Integer getIdCurso() {
-        return idCurso;
+        return IdCurso;
     }
 
     public void setIdCurso(Integer idCurso) {
-        this.idCurso = idCurso;
+        this.IdCurso = idCurso;
     }
 }

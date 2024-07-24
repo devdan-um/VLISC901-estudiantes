@@ -1,44 +1,45 @@
 package com.univer.estudiantes.controller;
 
-import com.univer.estudiantes.entity.EstudianteEntity;
 import com.univer.estudiantes.model.request.EstudianteRequest;
+import com.univer.estudiantes.model.response.EstudianteResponse;
+import com.univer.estudiantes.service.EstudianteService;
+import com.univer.estudiantes.entity.EstudianteEntity;
 import com.univer.estudiantes.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/univer/estudiante")
 public class EstudianteController {
 
     @Autowired
     private EstudianteRepository repository;
 
-    @GetMapping("/api/univer/estudiante/{id}")
-    public EstudianteEntity estudiantePorId(@PathVariable Integer id) {
+    @Autowired
+    private EstudianteService estudianteService;
 
-        if (repository.findById(id).isPresent()) {
-            return repository.findById(id).get();
-        } else {
-            return new EstudianteEntity();
-        }
+    @GetMapping("/{id}")
+    public ResponseEntity<EstudianteResponse> estudiantePorId(@PathVariable Integer id) {
+        EstudianteResponse response;
+        response = estudianteService.getEstudiante(id);
+        return response != null ? new ResponseEntity<>(response, HttpStatus.OK) : ResponseEntity.noContent().build();
+    }
+
+    @CrossOrigin("http://127.0.0.1:5500")
+    @PostMapping("/save")
+    public ResponseEntity<EstudianteEntity> guardarEstudiante(@RequestBody EstudianteRequest request) {
+        EstudianteEntity estudiante = new EstudianteEntity();
+        estudiante.setNombre(request.getNombre());
+        estudiante.setApellido(request.getApellido());
+        estudiante.setEnrolado(request.getEnrolado());
+        estudiante.setIdCurso(request.getIdCurso());
+        estudiante.setTelefono(request.getTelefono());
+        EstudianteEntity savedEstudiante = repository.save(estudiante);
+        return new ResponseEntity<>(savedEstudiante, HttpStatus.CREATED);
 
     }
 
-    @PostMapping("/api/univer/estudiante")
-    public ResponseEntity guardado(@RequestBody EstudianteRequest request) {
 
-        EstudianteEntity entity = new EstudianteEntity();
-        entity.setNombre(request.getNombre());
-        entity.setApellido(request.getApellido());
-        entity.setEnrolado(request.getEnrolado());
-        entity.setIdCurso(request.getIdCurso());
-        entity.setTelefono(request.getTelefono());
-
-
-        this.repository.save(entity);
-        return ResponseEntity.ok("se guardo exitosamente");
-    }
 }
-
-
-

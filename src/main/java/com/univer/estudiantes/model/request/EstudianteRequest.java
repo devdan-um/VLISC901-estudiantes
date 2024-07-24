@@ -11,8 +11,8 @@ public class EstudianteRequest {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String name) {
+        this.nombre = name;
     }
 
     public String getApellido() {

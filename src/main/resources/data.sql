@@ -1,2 +1,5 @@
 insert into ESTUDIANTE (NOMBRE,APELLIDO,ENROLADO,ID_CURSO,TELEFONO)
-VALUES ('carmen','piedras', true, 2 , 123);
+VALUES ('carmen','phiedras', true, 2 , 24567);
+
+insert into ESTUDIANTE (NOMBRE,APELLIDO,ENROLADO,ID_CURSO, TELEFONO)
+VALUES ('VLADIMIR','VERA', true, 4 , 292107);

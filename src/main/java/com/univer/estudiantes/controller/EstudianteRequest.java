@@ -1,50 +1,60 @@
 package com.univer.estudiantes.controller;
 
+import com.univer.estudiantes.service.EstudianteService;
+import com.univer.estudiantes.entity.EstudianteEntity;
+import com.univer.estudiantes.repository.EstudianteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
 public class EstudianteRequest {
-    private String name;
-    private String apellido;
-    private Boolean enrollado;
-    private Integer curso;
-    private Integer telefono;
+    @Autowired
+    private EstudianteService estudianteService;
 
-    public String getName() {
-        return name;
+    @Autowired
+    private EstudianteRepository estudianteRepository;
+
+    /*
+    @PostMapping("/api/univer/estudiante/save")
+    public EstudianteEntity createEstudiante(@RequestBody EstudianteEntity estudiante){
+       return estudianteService.createEstudiante(estudiante);
+
+    }*/
+    /*
+    @PostMapping("/api/univer/estudiante/save")
+    public ResponseEntity<EstudianteEntity> guardarEstudiante(@RequestBody EstudianteEntity request) {
+        EstudianteEntity estudiante = new EstudianteEntity();
+        estudiante.setNombre(request.getNombre());
+        estudiante.setApellido(request.getApellido());
+        estudiante.setEnrolado(request.getEnrolado());
+        estudiante.setIdCurso(request.getIdCurso());
+        estudiante.setTelefono(request.getTelefono());
+        EstudianteEntity savedEstudiante = estudianteRepository.save(estudiante);
+        return new ResponseEntity<>(savedEstudiante, HttpStatus.CREATED);
+    }*/
+
+    @GetMapping("/api/univer/estudiante/all")
+    public List<EstudianteEntity> getAllEstudiantes(){
+        return estudianteService.getAllEstudiantes();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @GetMapping("/api/univer/estudiante/get/get/{id}")
+    public EstudianteEntity searchStudentById(@PathVariable("id") Integer ID){
+        return estudianteService.getEstudianteById(ID);
     }
 
-    public String getApellido() {
-        return apellido;
+    @DeleteMapping("/delete/{id}")
+    public void deleteEstudianteById(@PathVariable("ID") Integer ID){
+        estudianteService.deleteEstudiante(ID);
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+    @GetMapping("/test/consulta/{id}")
+    public ResponseEntity estudiante(@PathVariable int id){
+        return  ResponseEntity.ok(this.estudianteRepository.findById(id).get());
 
-    public Boolean getEnrollado() {
-        return enrollado;
-    }
-
-    public void setEnrollado(Boolean enrollado) {
-        this.enrollado = enrollado;
-    }
-
-    public Integer getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Integer curso) {
-        this.curso = curso;
-    }
-
-    public Integer getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Integer telefono) {
-        this.telefono = telefono;
     }
 }
-
