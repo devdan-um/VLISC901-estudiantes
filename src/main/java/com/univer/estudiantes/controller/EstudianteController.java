@@ -24,6 +24,8 @@ public class EstudianteController {
         }
 
     }
+    @CrossOrigin("http://127.0.0.1:5500")
+
     @PostMapping("/api/univer/estudiante/save")
     public ResponseEntity<EstudianteEntity>guardarestudiante(@RequestBody EstudianteRequest request){
         EstudianteEntity estudiante=new EstudianteEntity();
@@ -34,6 +36,8 @@ public class EstudianteController {
         estudiante.setTelefono(request.getTelefono());
         EstudianteEntity savedEstudiante=repository.save(estudiante);
         return new ResponseEntity<>(savedEstudiante, HttpStatus.CREATED);
+
+
 
     }
 }

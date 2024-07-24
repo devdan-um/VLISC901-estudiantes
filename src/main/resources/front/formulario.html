@@ -1,31 +1,81 @@
-<!-- Formulario realizado en clase -->
-!DOCTYPE html>
+<!-- Formulario realizado en clase  de cursos -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>--- Formulario  Joa--- </title>
+    <title>--- Formulario  Joanna--- </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
     <script type="text/javascript">
-        function myFuncion(){
-            alert('Guardar')
+        function MyFunction(){
 
-            let name = document.getElementById("name").value;
-            let ln = document.getElementById("lasName").value;
+
 
             const estudiante = {
-                name : name,
-                lastName : ln,
-                curso :1
-            }
+                nombre : document.getElementById("nombre").value,
+            apellido : document.getElementById("apellido").value,
+            idCurso : document.getElementById("inputGroupSelect01").value
 
+            }
             console.log(estudiante)
 
+            fetch('http://localhost:8585/api/univer/estudiante/save',{
+            method: "POST",
+            body: JSON.stringify(estudiante),
+            headers: {
+                "Content-Type": "application/json"}
+        })
+
+        .then(response => {
+
+            if(response.ok && response.status===201){
+                console.log("Dentro de la primera Promesa")
+                return response.json()
+            }else{
+                throw Error(response.statusText)
+            }
+        })
+
+        .then(json=>{
+            console.log("segunda promesa")
+            console.log(json);
+            return json;
+        })
+
+        .catch(error=>{console.log(error)})
+
         }
+
+        function getCuatrimestres(){
+  fetch('http://localhost:8686/api/univer/cuatrimestre/all', {
+    method: "GET",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+})
+  .then(response =>{
+    if(response.ok){
+      return response.json()
+    }
+  })
+  .then(json =>{
+    console.log(json)
+    var options = "<option selected>Selecciona el cuatrimestre ...<option>";
+      for(var i = 0; i < json.length; i++){
+        console.log(json[i])
+        options += "<option value="+json[i].cuatrimestre+">"+ json[i].nombre + "</option>";
+      }
+      console.log(options)
+      document.getElementById("inputGroupSelect01").innerHTML = options
+      return json;
+  })
+  .catch(error => console.log(error))
+}
     </script>
 
 </head>
@@ -34,17 +84,27 @@
 <!-- copiado -->
 <form class="row g-3">
     <div class="col-auto">
-        <label class="visually-hidden" for="name"> Nombre: </label>
-        <input class="form-control-plaintext" type="text" id="name" name ="name" placeholder="Joanna">
+        <label class="visually-hidden" for="nombre"> Nombre: </label>
+        <input class="form-control-plaintext" type="text" id="nombre" name ="nombre" placeholder="Joanna">
     </div>
 
     <div class="col-auto">
-        <label class="visually-hidden" for="lasName"> Apellido: </label>
-        <input class ="form-control-plaintext" type="text" id="lasName" name ="lasName" placeholder="Reyes">
+        <label class="visually-hidden" for="apellido"> Apellido: </label>
+        <input class ="form-control-plaintext" type="text" id="apellido" name ="apellido" placeholder="Reyes">
+    </div>
+
+    <div class="col-5 pt-2">
+        <select class="form-select form-select-lg mb-3" id="inputGroupSelect01">
+            <option selected>Selecciona el cuatrimestre</option>
+            <script>
+                const cuatrimestre = getCuatrimestres();
+
+            </script>
+        </select>
     </div>
 
     <div class="col-auto">
-        <button type="button" class="btn btn-danger mb-3" onclick="myFuncion()"> Guardar </button>
+        <button type="button" class="btn btn-danger mb-3" onclick="MyFunction()"> Guardar </button>
     </div>
 </form>
 

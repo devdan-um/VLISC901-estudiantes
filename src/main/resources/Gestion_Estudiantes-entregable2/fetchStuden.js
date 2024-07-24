@@ -12,7 +12,7 @@ fetch('http://localhost:8585/api/univer/estudiante/save', {
     })
 
 .then(response => {
-    console.log(response)
+
     if(response.ok && response.status === 201 ){
         console.log('dentro de la primera promesa')
         return response.json()
@@ -26,5 +26,5 @@ fetch('http://localhost:8585/api/univer/estudiante/save', {
     return json;
 
 })
-.catch(error => console.log(error))
+.catch(error => {console.log(error)})
 
