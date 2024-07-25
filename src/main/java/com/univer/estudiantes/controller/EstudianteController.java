@@ -22,6 +22,8 @@ public class EstudianteController {
         }
 
     }
+
+    @CrossOrigin ("http://127.0.0.1:5500")
     @PostMapping("/api/univer/estudiante/save")
     public ResponseEntity<EstudianteEntity> guardarEstudiante(@RequestBody EstudianteRequest request) {
         EstudianteEntity estudiante = new EstudianteEntity();
