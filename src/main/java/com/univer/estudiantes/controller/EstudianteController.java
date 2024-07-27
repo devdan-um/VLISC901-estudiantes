@@ -3,59 +3,39 @@ package com.univer.estudiantes.controller;
 import com.univer.estudiantes.entity.EstudianteEntity;
 import com.univer.estudiantes.model.request.EstudianteRequest;
 import com.univer.estudiantes.model.response.EstudianteResponse;
-import com.univer.estudiantes.model.response.Notificaciones;
 import com.univer.estudiantes.repository.EstudianteRepository;
+import com.univer.estudiantes.service.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpClient;
-
 @RestController
 public class EstudianteController {
-
     @Autowired
     private EstudianteRepository repository;
-
+    @Autowired
+    private EstudianteService estudianteService;
     @GetMapping("/api/univer/estudiante/{id}")
-    public ResponseEntity<EstudianteEntity> estudiantePorId(@PathVariable Integer id){
-
-        if(repository.findById(id).isPresent()){
-            return ResponseEntity.ok(repository.findById(id).get());
+    public ResponseEntity estudiantePorId(@PathVariable Integer id){
+        EstudianteResponse response = this.estudianteService.getEstudiante(id);
+        if(response != null){
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             return ResponseEntity.noContent().build();
         }
 
     }
-
+    @CrossOrigin("http://127.0.0.1:5500")
     @PostMapping("/api/univer/estudiante/save")
-    public ResponseEntity<EstudianteResponse> guardarEstudiante(@RequestBody EstudianteRequest request){
-
-        EstudianteEntity estudiante = new EstudianteEntity();
+    public ResponseEntity<EstudianteEntity>guardarestudiante(@RequestBody EstudianteRequest request){
+        EstudianteEntity estudiante=new EstudianteEntity();
         estudiante.setNombre(request.getNombre());
         estudiante.setApellido(request.getApellido());
         estudiante.setEnrolado(request.getEnrolado());
         estudiante.setIdCurso(request.getIdCurso());
         estudiante.setTelefono(request.getTelefono());
-
-        repository.save(estudiante);
-
-        EstudianteResponse response = new EstudianteResponse();
-        response.setNombre(estudiante.getNombre());
-        response.setApellido(estudiante.getApellido());
-        response.setIdCurso(estudiante.getIdCurso());
-
-        Notificaciones notificacion = new Notificaciones();
-        notificacion.setLevel("INFO");
-        notificacion.setMessage("El registro se guardo de manera adecuada");
-        notificacion.setHttpStatus(HttpStatus.CREATED);
-
-        response.setNotificaciones(notificacion);
-
-        return new ResponseEntity<>(response, response.getNotificaciones().getHttpStatus());
-
+        EstudianteEntity savedEstudiante=repository.save(estudiante);
+        return new ResponseEntity<>(savedEstudiante, HttpStatus.CREATED);
     }
-
-
 }
