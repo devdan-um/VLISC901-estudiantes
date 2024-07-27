@@ -38,17 +38,52 @@
     .catch(error => {console.log(error)})
     
     }
+    function getCuatrimestres(){
+                fetch( 'http://localhost:8585/api/univer/cuatrimestre/all',{
+
+                    method : 'GET',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type' : 'application/json'
+                    }
+                })
+                .then(response =>{
+                  if(response.ok){
+                         return response.json()
+                  }
+                })
+                .then(json => {
+                   console.log(json);
+                   var options = "<option> Selecciona el Cuatrimestre</option>";
+                    for(var i =0;i <json.length; i++){
+                        console.log(json[i]);
+                        options += "<option value=" +json[i].cuatrimestre+">"+json[i].nombre+"</option>";
+                    }
+                    console.log(options);
+                   document.getElementById("inputGroupSelect01").innerHTML = options
+                   return json;
+                })
+                .catch(error => console.log(error))
+            }
     </script>
 </head>
 <body>
 <form class="row g-3">
     <div class="col-auto">
         <label for="name" class="">Nombre: </label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Ismael">
+        <input type="text" class="form-control" id="name" name="name" placeholder="">
     </div>
     <div class="col-auto">
         <label for="lastName" class="">Apellido: </label>
-        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Ramirez">
+        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="">
+    </div>
+    <div class="col-5 pt-2">
+        <select class="form-select form-select-lg mb-3" id="inputGroupSelect01">
+            <option selected>Seleccione el cuatrimestre</option>
+            <script>
+                const cuatrimestre = getCuatrimestres();
+            </script>
+        </select>
     </div>
     <div class="col-auto">
         <button type="submit" class="btn btn-outline-info mb-3" onclick="myFunction()">Guardar</button>
